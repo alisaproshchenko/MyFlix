@@ -1,0 +1,23 @@
+﻿@using EPiServer.Web.Mvc.Html
+@model Cms.Models.Pages.MovieDetailsPage
+@{
+    Layout = "_Layout";
+    ViewBag.Title = $"{@Model.MovieTitle} - MyFlix";
+}
+
+<div class="bg-dark text-white">
+    <h3 class="display-3 p-3 ps-5 m-0">@Html.PropertyFor(x => x.MovieTitle) (@Html.PropertyFor(x => x.MovieYear))</h3>
+</div>
+
+<div class="container-fluid bg-dark text-white p-5">
+    <div class="row ">
+        <div class="col d-flex justify-content-center">
+            <img @Html.EditAttributes(x => x.MoviePoster) src="@Url.ContentUrl(@Model.MoviePoster)" width="350" alt="" class="mt-3"/>
+        </div>
+        <div class="col pe-4 m-3">
+            <h4>@Html.PropertyFor(x => x.MovieDescription)</h4>
+            <hr/>
+            <p>Director: @Html.PropertyFor(x => x.MovieDirector)</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@using EPiServer.Web.Mvc.Html
+@model Cms.Models.ViewModels.MovieListViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Movie list - MyFlix";
+}
+
+<div class="bg-dark text-white container-fluid">
+    <h3 class="display-3 p-3 ps-5 m-0 text-center">@Html.PropertyFor(x => x.CurrentContent.Title)</h3>
+    <div class="row d-flex justify-content-center">
+        @foreach (var movie in @Model.MoviePages)
+        {
+            <div class="col-3 m-3">
+                <div class="row bg-light bg-opacity-10 container p-3 border border-light rounded">
+                    <div class="col d-flex justify-content-center">
+                        <img src="@Url.ContentUrl(movie.MoviePoster)" height="300" alt=""/>
+                    </div>
+                    <div class="col">
+                        <h5>@movie.MovieTitle (@movie.MovieYear)</h5>
+                        <p class=""><em>@Html.PropertyFor(x => movie.MovieDescription)</em></p>
+                        <p class="opacity-75">@movie.DurationMinutes min</p>
+                        <a class="text-light text-decoration-none border rounded-2 p-2 " href="@Url.ContentUrl(movie.ContentLink)">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

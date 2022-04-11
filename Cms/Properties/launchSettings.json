@@ -1,0 +1,42 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://myflix.local",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://myflix.local",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Cms": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:59403;http://localhost:59404"
+    },
+    "IIS": {
+      "commandName": "IIS",
+      "workingDirectory": "C:\\OptimizelyProjects\\MyFlix\\Cms",
+      "launchBrowser": true,
+      "launchUrl": "http://myflix.local",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "workingDirectory": "C:\\OptimizelyProjects\\MyFlix\\Cms",
+      "launchBrowser": true,
+      "launchUrl": "http://myflix.local",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
