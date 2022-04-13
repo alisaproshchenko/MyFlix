@@ -1,5 +1,6 @@
 ﻿using Cms.Business.SiteSettings;
 using EPiServer.Cms.UI.AspNetIdentity;
+using EPiServer.Find;
 using EPiServer.Web.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,12 @@ namespace Cms
             {
                 //Add development configuration
             }
+
+            services.Configure<FindOptions>(options =>
+            {
+                options.DefaultIndex = "alisa.proshchenko_myflixindex";
+                options.ServiceUrl = "https://demo01.find.episerver.net/hW4vT16bt0HM4NHJgl1M4suSveheiIAt/";
+            });
 
             services.AddMvc();
             services.AddCms()
