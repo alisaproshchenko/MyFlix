@@ -3,23 +3,29 @@
     Layout = "_Layout";
     ViewBag.Title = "Search results - MyFlix";
 }
-@using (Html.BeginForm(FormMethod.Post))
-{
-    <input type="text" tabindex="1" name="query" value ="@Model.SearchQuery" />
-    <input type="submit" tabindex="2" class="btn" value="Search" />
-}
-@if (Model.Results != null)
-{
-    <h3>Your search for <em>@Model.SearchQuery</em>:</h3>
-    <div>
-        <ul>
-            @foreach (var item in Model.Results)
-            {
-                <li>
-                    <h4><a href="@item.Url">@item.Title</a></h4>
-                    @item.Excerpt
-                </li>
-            }
-        </ul>
+<div class="bg-dark text-white container-fluid p-3">
+    <div class="col-4 p-4">
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            <input class="form-control" type="text" tabindex="1" name="query" value="@Model.SearchQuery"/>
+            <input class="btn bg-black text-light" type="submit" tabindex="2" value="Search"/>
+        }
     </div>
-}
+    
+    @if (Model.Results != null)
+    {
+        <h3 class="display-3">Your search for <em>@Model.SearchQuery</em>:</h3>
+        <div>
+            <ul>
+                @foreach (var item in Model.Results)
+                {
+                    <li>
+                        <h4><a class="text-decoration-none text-white" href="@item.Url">@item.Title</a></h4>
+                        <p class="text-secondary">@item.Excerpt</p>
+                        
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
