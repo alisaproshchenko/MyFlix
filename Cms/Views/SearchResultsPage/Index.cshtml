@@ -1,0 +1,25 @@
+﻿@model Cms.Models.ViewModels.SearchViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Search results - MyFlix";
+}
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <input type="text" tabindex="1" name="query" value ="@Model.SearchQuery" />
+    <input type="submit" tabindex="2" class="btn" value="Search" />
+}
+@if (Model.Results != null)
+{
+    <h3>Your search for <em>@Model.SearchQuery</em>:</h3>
+    <div>
+        <ul>
+            @foreach (var item in Model.Results)
+            {
+                <li>
+                    <h4><a href="@item.Url">@item.Title</a></h4>
+                    @item.Excerpt
+                </li>
+            }
+        </ul>
+    </div>
+}
