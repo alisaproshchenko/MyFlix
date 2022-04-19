@@ -26,6 +26,13 @@ namespace Cms.Models.Pages
         [AllowedTypes(typeof(NavigationBlock))]
         public virtual ContentArea SiteSettings { get; set; }
 
+        [Display(
+            Name = "A link to search results",
+            Description = "",
+            GroupName = SystemTabNames.Content,
+            Order = 80)]
+        public virtual PageReference SearchResultsLink { get; set; }
+
         [CultureSpecific]
         [Display(
                Name = "Title for start page",

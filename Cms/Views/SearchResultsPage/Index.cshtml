@@ -1,0 +1,47 @@
+﻿@model Cms.Models.ViewModels.SearchViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Search results - MyFlix";
+}
+<div class="bg-dark text-white container-fluid p-3">
+    <div class="col-4 p-4">
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            <input class="form-control" type="text" tabindex="1" name="query" value="@Model.SearchQuery"/>
+            <input class="btn bg-black text-light" type="submit" tabindex="2" value="Search"/>
+        }
+    </div>
+    
+    @if (Model.Results.Count() != 0)
+    {
+        <h3 class="display-3">Your search for <em>@Model.SearchQuery</em>:</h3>
+        <div>
+            <ul>
+                @foreach (var item in Model.Results)
+                {
+                    <li>
+                        <div class="row p-2 mt-3 mb-3">
+                            <div class="col-2">
+                                <h4>@item.Title </h4>
+                                <div class="mt-3">
+                                    <a class="text-decoration-none text-white border rounded-2 p-2" href="@item.Url">View</a>
+                                </div>
+                                
+                            </div>
+                            <div class="col-6">
+                                <p class="text-secondary">@item.Excerpt</p>
+                            </div>
+                        </div>
+                        
+                        
+
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <h4 class="text-secondary"><em>Nothing was found</em></h4>
+    }
+</div>
