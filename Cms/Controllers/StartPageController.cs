@@ -30,7 +30,7 @@ namespace Cms.Controllers
             if (searchPage is null)
                 return View("Index");
 
-            return new RedirectResult(searchPage.LinkURL + $"index?query={query}");
+            return new RedirectResult($"http://myflix.local/{searchPage.URLSegment}/Index?query={query}");
         }
     }
 }

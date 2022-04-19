@@ -1,8 +1,14 @@
-﻿using Cms.Models.Pages;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Cms.Models.Pages;
 using Cms.Models.ViewModels;
+using EPiServer;
+using EPiServer.Core;
 using EPiServer.Find;
 using EPiServer.Find.Cms;
 using EPiServer.Find.Framework;
+using EPiServer.ServiceLocation;
 using EPiServer.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +23,8 @@ namespace Cms.Controllers
                 return View(model);
 
             var unifiedSearch = SearchClient.Instance.UnifiedSearchFor(query);
-            model.Results = unifiedSearch.GetResult();
+            var filtered = unifiedSearch.Filter(x => x.MatchTypeHierarchy(typeof(MovieDetailsPage)));
+            model.Results = filtered.GetResult();
             return View(model);
         }
     }
