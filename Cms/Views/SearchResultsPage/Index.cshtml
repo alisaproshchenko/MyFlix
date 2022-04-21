@@ -3,18 +3,27 @@
     Layout = "_Layout";
     ViewBag.Title = "Search results - MyFlix";
 }
-<div class="bg-dark text-white container-fluid p-3">
-    <div class="col-4 p-4">
-        @using (Html.BeginForm(FormMethod.Post))
+<div class="bg-dark text-white container-fluid p-3" >
+    <div class=" input-group  p-4">
+        @using (Html.BeginForm(FormMethod.Post, new{style = "display: inline-block"}))
         {
-            <input class="form-control" type="text" tabindex="1" name="query" value="@Model.SearchQuery"/>
-            <input class="btn bg-black text-light" type="submit" tabindex="2" value="Search"/>
+            <input class="rounded m-1" type="text" tabindex="1" name="query" value="@Model.SearchQuery"/>
+            <input class="m-1 btn btn-outline-light bg-black text-light" type="submit" tabindex="2" value="Search"/>
         }
     </div>
     
-    @if (Model.Results.Count() != 0)
+    @if (Model.Results != null && Model.Results.Count() != 0)
     {
-        <h3 class="display-3">Your search for <em>@Model.SearchQuery</em>:</h3>
+        <div class=row>
+            <div class="col">
+                <h3 class="display-3">Your search for <em>@Model.SearchQuery</em>:</h3>
+            </div>
+            <div class="col">
+                <h6 class="display-6 opacity-75 pt-4">@Model.Results.Count() results found</h6>
+            </div>
+            
+        </div>
+        
         <div>
             <ul>
                 @foreach (var item in Model.Results)
@@ -32,15 +41,12 @@
                                 <p class="text-secondary">@item.Excerpt</p>
                             </div>
                         </div>
-                        
-                        
-
                     </li>
                 }
             </ul>
         </div>
     }
-    else
+    else if(Model.Results != null)
     {
         <h4 class="text-secondary"><em>Nothing was found</em></h4>
     }
