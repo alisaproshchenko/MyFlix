@@ -10,6 +10,9 @@ namespace Cms.Models.ViewModels
             SearchQuery = searchQuery;
         }
 
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 5;
+        public int PagesQuantity { get; set; }
         public string SearchQuery { get; set; }
         public UnifiedSearchResults Results { get; set; }
     }
