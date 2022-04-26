@@ -30,6 +30,11 @@ namespace Cms.Models.Pages
 
         [AllowedTypes(typeof(ImageMedia))]
         [UIHint(UIHint.Image)]
+        [Display(
+            Name = "Movie Poster",
+            GroupName = SystemTabNames.Content,
+            Order = 110
+            )]
         public virtual ContentReference MoviePoster { get; set; }
 
         [CultureSpecific]

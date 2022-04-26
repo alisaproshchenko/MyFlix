@@ -51,6 +51,11 @@ namespace Cms.Models.Pages
 
         [AllowedTypes(typeof(ImageMedia))]
         [UIHint(UIHint.Image)]
+        [Display(
+            Name = "Hero image",
+            GroupName = SystemTabNames.Content,
+            Order = 150
+        )]
         public virtual ContentReference HeroImage { get; set; }
 
         [CultureSpecific]
@@ -71,6 +76,11 @@ namespace Cms.Models.Pages
 
         [AllowedTypes(typeof(ImageMedia))]
         [UIHint(UIHint.Image)]
+        [Display(
+            Name = "Cross platform feature image",
+            GroupName = SystemTabNames.Content,
+            Order = 110
+        )]
         public virtual ContentReference CrossPlatformFeatureImage { get; set; }
     }
 }

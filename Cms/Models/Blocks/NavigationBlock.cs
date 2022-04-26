@@ -19,6 +19,7 @@ namespace Cms.Models.Blocks
             Order = 100)]
         [AllowedTypes(typeof(ImageMedia))]
         [UIHint(UIHint.Image)]
+
         public virtual ContentReference LogoImage { get; set; }
 
         [CultureSpecific]
