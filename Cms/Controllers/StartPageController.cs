@@ -11,9 +11,11 @@ namespace Cms.Controllers
     public class StartPageController : PageController<StartPage>
     {
         private readonly IPageRouteHelper _routeHelper;
-        public StartPageController(IPageRouteHelper routeHelper)
+        private readonly IUrlResolver _urlResolver;
+        public StartPageController(IPageRouteHelper routeHelper, IUrlResolver urlresolver)
         {
             _routeHelper = routeHelper;
+            _urlResolver = urlresolver;
         }
         [HttpGet]
         public IActionResult Index(StartPage currentPage)
@@ -30,7 +32,9 @@ namespace Cms.Controllers
             if (searchPage is null)
                 return View("Index");
 
-            return new RedirectResult($"http://myflix.local/{searchPage.URLSegment}/Index?query={query}");
+            var url = _urlResolver.GetUrl(searchPage.ContentLink);
+
+            return new RedirectResult($"{url}Index?query={query}");
         }
     }
 }
