@@ -18,15 +18,17 @@
             <h4>@Html.PropertyFor(x => x.CurrentPage.MovieDescription)</h4>
             <hr/>
             <p>Director: @Html.PropertyFor(x => x.CurrentPage.MovieDirector)</p>
-            <input id="like-button" class="m-1 btn btn-outline-light bg-black text-light" type="button" value="Like"/>
+            <button id="like-button" class="m-1 btn btn-outline-light bg-black text-light" type="button">Like</button>
             <span id="likes-value">@Model.CurrentPage.LikesCount</span><label> users liked this movie</label>
-            @*<script>
+            <script>
                 document.querySelector('#like-button')
                 .addEventListener('click', () => {
-                    fetch()
+                    fetch('@Model.LikesIncrementEndpoint', { method: 'POST' })
+                        .then(response => response.json())
+                        .then(data => document.querySelector('#likes-value').innerText = data.count);
 
                 });
-            </script>*@
+            </script>
 
         </div>
     </div>
