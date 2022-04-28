@@ -69,6 +69,12 @@ namespace Cms.Models.Pages
             Order = 170)]
         public virtual int DurationMinutes { get; set; }
 
-        
+        [CultureSpecific]
+        [ScaffoldColumn(false)]
+        [Display(
+            Name = "Likes count of the movie",
+            Order = 165,
+            GroupName = SystemTabNames.Content)]
+        public virtual int LikesCount { get; set; } = 0;
     }
 }
