@@ -70,7 +70,7 @@ namespace Cms.Models.Pages
         public virtual int DurationMinutes { get; set; }
 
         [CultureSpecific]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         [Display(
             Name = "Likes count of the movie",
             Order = 165,

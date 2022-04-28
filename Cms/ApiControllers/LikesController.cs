@@ -1,25 +1,37 @@
 ﻿using System;
+using System.Globalization;
+using Cms.Models.Pages;
 using EPiServer;
-using EPiServer.Web.Routing;
+using EPiServer.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cms.ApiControllers
 {
     [ApiController]
+    [Route("api/likes")]
     public class LikesController : ControllerBase
     {
-        private readonly IContentLoader _contentLoader;
-        private readonly IPageRouteHelper _routeHelper;
+        private readonly IContentRepository _contentRepository;
 
-        public LikesController(IContentLoader contentLoader, IPageRouteHelper routeHelper)
+        public LikesController(IContentRepository contentRepository)
         {
-            _contentLoader = contentLoader;
-            _routeHelper = routeHelper;
+            _contentRepository = contentRepository;
         }
+
+        [HttpPost]
+        [Route("/increment/{contentGuid}/{language}")]
         public IActionResult IncrementLike(Guid contentGuid, string language)
         {
-            
-            if(!ModelState.IsValid) return BadRequest();
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+
+            var culture = new CultureInfo(language);
+            var movie = _contentRepository.Get<MovieDetailsPage>(contentGuid, culture);
+
+            if (movie is null) return NotFound();
+
+            movie.LikesCount++;
+
+            _contentRepository.Save(movie, SaveAction.ForceCurrentVersion);
 
             return Ok();
         }
