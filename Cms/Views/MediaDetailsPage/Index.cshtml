@@ -18,6 +18,16 @@
             <h4>@Html.PropertyFor(x => x.MovieDescription)</h4>
             <hr/>
             <p>Director: @Html.PropertyFor(x => x.MovieDirector)</p>
+            <input id="like-button" class="m-1 btn btn-outline-light bg-black text-light" type="button" value="Like"/>
+            <span id="likes-value">@Model.LikesCount</span><label> users liked this movie</label>
+            <script>
+                document.querySelector('#like-button')
+                .addEventListener('click', () => {
+                    fetch()
+
+                });
+            </script>
+
         </div>
     </div>
 </div>
