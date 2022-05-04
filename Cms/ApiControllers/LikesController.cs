@@ -33,17 +33,44 @@ namespace Cms.ApiControllers
             var movie = _contentRepository.Get<MovieDetailsPage>(contentGuid, culture);
 
             if (movie is null) return NotFound();
+            
+            var writableCone = (MovieDetailsPage) movie.CreateWritableClone();
 
-            movie.LikesCount++;
+            writableCone.LikesCount++;
 
-            _contentRepository.Save(movie, SaveAction.ForceCurrentVersion);
+            _contentRepository.Save(writableCone, SaveAction.ForceCurrentVersion);
 
             return new ContentResult()
             {
                 Content = JsonConvert.SerializeObject(new
                 {
-                    count = movie.LikesCount
+                    count = writableCone.LikesCount
                 }),
+                ContentType = "application/json"
+            };
+        }
+        [HttpGet]
+        [Route("test")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult TestMethod()
+        {
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("testvalues/{contentGuid:guid}/{language}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult TestValuesMethod(Guid contentGuid, string language)
+        {
+            var json = JsonConvert.SerializeObject(new
+            {
+                culture = language,
+                guid = contentGuid
+            });
+
+            return new ContentResult()
+            {
+                Content = json,
                 ContentType = "application/json"
             };
         }

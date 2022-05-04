@@ -14,7 +14,7 @@ namespace Cms.Controllers
             {
                 CurrentPage = currentPage,
                 LikesIncrementEndpoint =
-                    new Uri($"api/likes/increment/{currentPage.ContentGuid}/{currentPage.Language}", UriKind.Relative)
+                    new Uri($"/api/likes/increment/{currentPage.ContentGuid}/{currentPage.Language}", UriKind.Relative)
             };
             return View(model);
         }
