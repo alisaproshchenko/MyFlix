@@ -3,23 +3,28 @@ using System.Globalization;
 using Cms.Models.Pages;
 using EPiServer;
 using EPiServer.DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Cms.ApiControllers
 {
     [ApiController]
     [Route("api/likes")]
-    public class LikesController : ControllerBase
+    public class LikesApiController : ControllerBase
     {
         private readonly IContentRepository _contentRepository;
 
-        public LikesController(IContentRepository contentRepository)
+        public LikesApiController(IContentRepository contentRepository)
         {
             _contentRepository = contentRepository;
         }
 
         [HttpPost]
-        [Route("/increment/{contentGuid}/{language}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("increment/{contentGuid:Guid}/{language}")]
         public IActionResult IncrementLike(Guid contentGuid, string language)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
@@ -33,7 +38,14 @@ namespace Cms.ApiControllers
 
             _contentRepository.Save(movie, SaveAction.ForceCurrentVersion);
 
-            return Ok();
+            return new ContentResult()
+            {
+                Content = JsonConvert.SerializeObject(new
+                {
+                    count = movie.LikesCount
+                }),
+                ContentType = "application/json"
+            };
         }
     }
 }

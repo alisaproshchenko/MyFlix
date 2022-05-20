@@ -1,23 +1,35 @@
 ﻿@using EPiServer.Web.Mvc.Html
-@model Cms.Models.Pages.MovieDetailsPage
+@model Cms.Models.ViewModels.MovieDetailsViewModel
 @{
     Layout = "_Layout";
-    ViewBag.Title = $"{@Model.MovieTitle} - MyFlix";
+    ViewBag.Title = $"{@Model.CurrentPage.MovieTitle} - MyFlix";
 }
 
 <div class="bg-dark text-white">
-    <h3 class="display-3 p-3 ps-5 m-0">@Html.PropertyFor(x => x.MovieTitle) (@Html.PropertyFor(x => x.MovieYear))</h3>
+    <h3 class="display-3 p-3 ps-5 m-0">@Html.PropertyFor(x => x.CurrentPage.MovieTitle) (@Html.PropertyFor(x => x.CurrentPage.MovieYear))</h3>
 </div>
 
 <div class="container-fluid bg-dark text-white p-5">
     <div class="row ">
         <div class="col d-flex justify-content-center">
-            <img @Html.EditAttributes(x => x.MoviePoster) src="@Url.ContentUrl(@Model.MoviePoster)" width="350" alt="" class="mt-3"/>
+            <img @Html.EditAttributes(x => x.CurrentPage.MoviePoster) src="@Url.ContentUrl(@Model.CurrentPage.MoviePoster)" width="350" alt="" class="mt-3"/>
         </div>
         <div class="col pe-4 m-3">
-            <h4>@Html.PropertyFor(x => x.MovieDescription)</h4>
+            <h4>@Html.PropertyFor(x => x.CurrentPage.MovieDescription)</h4>
             <hr/>
-            <p>Director: @Html.PropertyFor(x => x.MovieDirector)</p>
+            <p>Director: @Html.PropertyFor(x => x.CurrentPage.MovieDirector)</p>
+            <button id="like-button" class="m-1 btn btn-outline-light bg-black text-light" type="button">Like</button>
+            <span id="likes-value">@Model.CurrentPage.LikesCount</span><label> users liked this movie</label>
+            <script>
+                document.querySelector('#like-button')
+                .addEventListener('click', () => {
+                    fetch('@Model.LikesIncrementEndpoint', { method: 'POST' })
+                        .then(response => response.json())
+                        .then(data => document.querySelector('#likes-value').innerText = data.count);
+
+                });
+            </script>
+
         </div>
     </div>
 </div>

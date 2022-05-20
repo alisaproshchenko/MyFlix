@@ -61,6 +61,7 @@ namespace Cms
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapContent();
+                endpoints.MapControllers();
             });
         }
     }
