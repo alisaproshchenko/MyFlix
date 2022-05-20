@@ -73,7 +73,7 @@ namespace Cms.Models.Pages
         [ScaffoldColumn(false)]
         [Display(
             Name = "Likes count of the movie",
-            Order = 165,
+            Order = 180,
             GroupName = SystemTabNames.Content)]
         public virtual int LikesCount { get; set; } = 0;
     }
